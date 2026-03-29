@@ -5,7 +5,8 @@ namespace FoolCard
 {
 	public partial class HomePage : Node2D
 	{
-		private const string DefaultServer = "ws://127.0.0.1:8080";
+		private static string DefaultServer => OS.IsDebugBuild() ? "ws://127.0.0.1:8080"
+																 : "ws://kirayuukiasuna.cloud:61018";
 
 		private LineEdit _serverInput  = null!;
 		private LineEdit _roomInput    = null!;

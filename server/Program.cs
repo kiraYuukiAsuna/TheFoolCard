@@ -3,7 +3,7 @@ using Fleck;
 using FoolCardServer;
 
 string host = args.Length > 0 ? args[0] : "0.0.0.0";
-int port    = args.Length > 1 ? int.Parse(args[1]) : 8080;
+int port = args.Length > 1 ? int.Parse(args[1]) : 61018;
 
 var manager = new RoomManager();
 var server  = new WebSocketServer($"ws://{host}:{port}");
