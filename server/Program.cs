@@ -17,5 +17,3 @@ server.Start(socket =>
 });
 
 Console.WriteLine($"FoolCard Server listening on ws://{host}:{port}");
-Console.WriteLine("Press Enter to quit.");
-Console.ReadLine();
