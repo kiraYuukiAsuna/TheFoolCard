@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Fleck;
 using FoolCardServer;
 
@@ -17,3 +18,4 @@ server.Start(socket =>
 });
 
 Console.WriteLine($"FoolCard Server listening on ws://{host}:{port}");
+Thread.Sleep(Timeout.Infinite);
