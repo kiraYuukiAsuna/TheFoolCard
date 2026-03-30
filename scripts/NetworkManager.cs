@@ -36,7 +36,7 @@ public partial class NetworkManager : Node
 	{
 		// 手机端 UI 缩放
 		if (OS.GetName() is "Android" or "iOS")
-			GetWindow().ContentScaleFactor = 1.5f;
+			GetWindow().ContentScaleFactor = 1.1f;
 	}
 
 	public override void _Process(double delta)

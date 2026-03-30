@@ -11,7 +11,7 @@ namespace FoolCard
 		{
 			{ "zh", new Dictionary<string, string>
 				{
-					{ "THE_FOOL_CARD", "愚者之战 THE FOOL CARD" },
+					{ "THE_FOOL_CARD", "愚者之战" },
 					{ "AUTHORITATIVE_DUEL", "权威对决" },
 					{ "SERVER_ADDRESS", "服务器地址" },
 					{ "PLAYER_IDENTITY", "玩家名称" },
@@ -35,18 +35,18 @@ namespace FoolCard
 					{ "WAITING", "等待中" },
 					{ "YOUR_TURN", "你的回合" },
 					{ "DISCARDS", "剩余换牌: {0}" },
-					{ "CONFIRM_TURN", "结束回合\nCONFIRM" },
-					{ "SURRENDER", "认输返回\nSURRENDER" },
-					{ "OPPONENT", "对手 Opponent: " },
-					{ "YOU", "我方 You: " },
-					{ "COMMUNITY", "公共 Community" },
+					{ "CONFIRM_TURN", "结束回合" },
+					{ "SURRENDER", "认输返回" },
+					{ "OPPONENT", "对手: " },
+					{ "YOU", "我方: " },
+					{ "COMMUNITY", "公共" },
 					{ "AREA", "区域 {0}" },
 					{ "YOUR_HAND", "你的手牌" },
 					{ "YOUR_CARDS", "你的出牌" },
 					{ "NO_EFFECT", "无特殊效果" },
-					{ "WIN", "胜利 (WINNER!)" },
-					{ "DEFEAT", "失败 (DEFEAT)" },
-					{ "DRAW", "平局 (DRAW)" },
+					{ "WIN", "胜利！" },
+					{ "DEFEAT", "失败！" },
+					{ "DRAW", "平局！" },
 					{ "YOU_WON_AREAS", "你赢得了 {0} 个区域" },
 					{ "RETURN_HOME", "返回主页" },
 					{ "DISCARD_MODE", "换牌" },
@@ -55,7 +55,7 @@ namespace FoolCard
 					{ "WAIT_OPP_PLAY", "等待对手出牌..." },
 					{ "SURRENDER_WARN", "确定要认输并返回主页吗？\n(对手将直接获胜)" },
 					{ "WARNING", "警告" },
-					{ "OPP_DISCONNECTED", "胜利 (WIN)\n对手逃跑" }
+					{ "OPP_DISCONNECTED", "胜利！\n对手逃跑" }
 				}
 			},
 			{ "en", new Dictionary<string, string>

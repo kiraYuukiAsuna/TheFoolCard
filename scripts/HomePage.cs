@@ -5,7 +5,7 @@ namespace FoolCard
 {
 	public partial class HomePage : Node2D
 	{
-		private static string DefaultServer => OS.IsDebugBuild() ? "ws://127.0.0.1:8080"
+		private static string DefaultServer => OS.IsDebugBuild() ? "ws://kirayuukiasuna.cloud:61018"
 																 : "ws://kirayuukiasuna.cloud:61018";
 
 		private LineEdit _serverInput  = null!;
@@ -25,6 +25,17 @@ namespace FoolCard
 		private int _bgIndex           = 0;
 		private bool _isMatchmaking    = false;
 		private bool _suppressDisconnectStatus = false;
+		private static string[] _bgs = {
+				"1a06e953363c6cfc798ee90bd6cbb1db_2542912024253540717.png",
+				"1b3015542e19d8ffd63124c2a276f14d_7134451685971220867.png",
+				"5b60764dabc3bf50c2ad7b5ff8eae80b_2607687582866761407.png",
+				"8cde2eecbcb0e52a8ea297f25c8b04f9_8136231554944386902.png",
+				"85c031f1979b9193e23c04077bcaaca8_8971907524219423657.png",
+				"ad46063ffc2d6e5c2295a26455a8b013_7604060047732187898.png",
+				"c59413073c709046d1859401bc1427d4_2057704816026768331.png",
+				"ea84533168c8d6d39017a9115088f24d_6150696023930492206.png",
+				"edd46ccfa31c619e9f692335dbe986ff_8954032505230804082.png"
+			};
 
 		public override void _Ready()
 		{
@@ -33,11 +44,12 @@ namespace FoolCard
 			NetworkManager.Instance.Connected += OnConnected;
 			NetworkManager.Instance.Disconnected += OnDisconnected;
 			NetworkManager.Instance.MessageReceived += OnMessage;
-			
+
 			var timer = new Godot.Timer();
 			timer.WaitTime = 5.0f;
 			timer.Autostart = true;
-			timer.Timeout += () => {
+			timer.Timeout += () =>
+			{
 				_bgIndex++;
 				_bgTex.Texture = GetBg(_bgIndex);
 			};
@@ -338,12 +350,9 @@ namespace FoolCard
 
 		public static Texture2D GetBg(int index)
 		{
-			string[] bgs = {
-				"1a06e953363c6cfc798ee90bd6cbb1db_2542912024253540717.png",
-				"1b3015542e19d8ffd63124c2a276f14d_7134451685971220867.png",
-                "5b60764dabc3bf50c2ad7b5ff8eae80b_2607687582866761407.png"
-			};
-			return ResourceLoader.Load<Texture2D>($"res://bg/{bgs[index % bgs.Length]}");
+			return ResourceLoader.Load<Texture2D>($"res://bg/{_bgs[index % _bgs.Length]}");
 		}
+
+		public static int BgCount => _bgs.Length;
 	}
 }

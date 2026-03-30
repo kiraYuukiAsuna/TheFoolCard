@@ -95,7 +95,6 @@ public partial class GamePage : Node2D
 
 		// --- HUD LEFT ---
 		var hud = new PanelContainer();
-		hud.CustomMinimumSize = new Vector2(220, 0);
 		var hudStyle = new StyleBoxFlat { BgColor = new Color(0.05f, 0.1f, 0.2f, 0.8f) };
 		hudStyle.SetCornerRadiusAll(10);
 		hud.AddThemeStyleboxOverride("panel", hudStyle);
@@ -141,7 +140,8 @@ public partial class GamePage : Node2D
 		// Arena (Areas)
 		var arena = new HBoxContainer { Alignment = BoxContainer.AlignmentMode.Center };
 		arena.AddThemeConstantOverride("separation", 15);
-		arena.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
+		// 关键修改：不再使用 ExpandFill，或者给一个较小的 StretchRatio
+		arena.SizeFlagsVertical = Control.SizeFlags.ExpandFill; 
 		stageV.AddChild(arena);
 
 		for (int i = 0; i < 3; i++)
@@ -162,7 +162,7 @@ public partial class GamePage : Node2D
 			oppHeader.AddChild(new Label { Text = I18n.T("OPPONENT"), Modulate = new Color(0.8f, 0.4f, 0.4f) });
 			oppHeader.AddChild(_oppScoreLabels[i]);
 
-			_oppSlots[i] = new HBoxContainer { Alignment = BoxContainer.AlignmentMode.Center, CustomMinimumSize = new Vector2(0, 130) };
+			_oppSlots[i] = new HBoxContainer { Alignment = BoxContainer.AlignmentMode.Center, CustomMinimumSize = new Vector2(0, 140) };
 			av.AddChild(_oppSlots[i]);
 
 			av.AddChild(new HSeparator());
@@ -172,10 +172,10 @@ public partial class GamePage : Node2D
 				Modulate = new Color(0.7f, 0.9f, 1f),
 				AutowrapMode = TextServer.AutowrapMode.WordSmart
 			};
-			_effectLabels[i].AddThemeFontSizeOverride("font_size", 14);
+			_effectLabels[i].AddThemeFontSizeOverride("font_size", 20);
 			av.AddChild(_effectLabels[i]);
 
-			_commRows[i] = new HBoxContainer { Alignment = BoxContainer.AlignmentMode.Center, CustomMinimumSize = new Vector2(0, 130) };
+			_commRows[i] = new HBoxContainer { Alignment = BoxContainer.AlignmentMode.Center, CustomMinimumSize = new Vector2(0, 140) };
 			av.AddChild(_commRows[i]);
 			av.AddChild(new HSeparator());
 
@@ -187,7 +187,7 @@ public partial class GamePage : Node2D
 			myHeader.AddChild(new Label { Text = I18n.T("YOU"), Modulate = ColCyan });
 			myHeader.AddChild(_myScoreLabels[i]);
 
-			var myBox = new AreaDropZone { SizeFlagsVertical = Control.SizeFlags.ExpandFill, AreaIndex = i };
+			var myBox = new AreaDropZone { SizeFlagsVertical = Control.SizeFlags.ExpandFill, AreaIndex = i, CustomMinimumSize = new Vector2(0, 140) };
 			var myBoxStyle = new StyleBoxFlat { BgColor = new Color(1,1,1,0.06f) };
 			myBoxStyle.SetCornerRadiusAll(8);
 			myBox.AddThemeStyleboxOverride("panel", myBoxStyle);
@@ -205,10 +205,11 @@ public partial class GamePage : Node2D
 		}
 
 		// Bottom Hand
-		var handP = new PanelContainer { CustomMinimumSize = new Vector2(0, 180) };
+		var handP = new PanelContainer();
 		var handStyle = new StyleBoxFlat { BgColor = new Color(0, 0, 0, 0.4f) };
 		handStyle.SetCornerRadiusAll(15);
 		handP.AddThemeStyleboxOverride("panel", handStyle);
+		handP.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
 		stageV.AddChild(handP);
 
 		var handV = new VBoxContainer(); handP.AddChild(handV);
@@ -228,7 +229,7 @@ public partial class GamePage : Node2D
 
 		// --- RIGHT ACTION BAR ---
 		var rightBar = new PanelContainer();
-		rightBar.CustomMinimumSize = new Vector2(160, 0);
+		rightBar.CustomMinimumSize = new Vector2(100, 0);
 		var rightStyle = new StyleBoxFlat { BgColor = new Color(0.05f, 0.1f, 0.2f, 0.6f) };
 		rightStyle.SetCornerRadiusAll(10);
 		rightBar.AddThemeStyleboxOverride("panel", rightStyle);
@@ -239,14 +240,14 @@ public partial class GamePage : Node2D
 		rightV.AddThemeConstantOverride("separation", 20);
 		rightBar.AddChild(rightV);
 
-		_confirmBtn = new Button { Text = I18n.T("CONFIRM_TURN"), CustomMinimumSize = new Vector2(140, 100) };
+		_confirmBtn = new Button { Text = I18n.T("CONFIRM_TURN"), CustomMinimumSize = new Vector2(100, 80) };
 		var btnStyle = new StyleBoxFlat { BgColor = new Color(0.15f, 0.35f, 0.8f) }; btnStyle.SetCornerRadiusAll(12);
 		_confirmBtn.AddThemeStyleboxOverride("normal", btnStyle);
 		_confirmBtn.AddThemeFontSizeOverride("font_size", 18);
 		_confirmBtn.Pressed += () => { NetworkManager.Instance.PlaySound("PJMS_UI_Button_Tab"); OnConfirmPressed(); };
 		rightV.AddChild(_confirmBtn);
 
-		_surrenderBtn = new Button { Text = I18n.T("SURRENDER"), CustomMinimumSize = new Vector2(140, 60) };
+		_surrenderBtn = new Button { Text = I18n.T("SURRENDER"), CustomMinimumSize = new Vector2(100, 60) };
 		var surStyle = new StyleBoxFlat { BgColor = new Color(0.6f, 0.2f, 0.2f) }; surStyle.SetCornerRadiusAll(12);
 		_surrenderBtn.AddThemeStyleboxOverride("normal", surStyle);
 		_surrenderBtn.Pressed += () => { NetworkManager.Instance.PlaySound("BH3_Generic_Select"); OnSurrenderRequested(); };
@@ -438,7 +439,7 @@ public partial class GamePage : Node2D
 	private void ClearContainer(Node n) { foreach (Node c in n.GetChildren()) c.QueueFree(); }
 	private void AddLog(string t, bool err = false) {
 		var l = new Label { Text = t }; 
-		l.AddThemeFontSizeOverride("font_size", 14);
+		l.AddThemeFontSizeOverride("font_size", 20);
 		if (err) l.Modulate = new Color(1, 0.4f, 0.4f);
 		_logContainer.AddChild(l); _logContainer.MoveChild(l, 0);
 	}
