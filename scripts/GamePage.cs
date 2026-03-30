@@ -375,7 +375,7 @@ public partial class GamePage : Node2D
 			ClearContainer(_oppSlots[i]);
 			var oppP = area.Placements.FirstOrDefault(p => p.PlayerId == (1-_myId));
 			if (oppP != null) {
-				foreach (int c in oppP.LockedCards) AddCard(_oppSlots[i], c, s.Phase != "GAME_END", SizeCard);
+				foreach (int c in oppP.LockedCards) AddCard(_oppSlots[i], c, false, SizeCard);
 				foreach (int c in oppP.PendingCards) AddCard(_oppSlots[i], 0, true, SizeCard);
 			}
 		}
